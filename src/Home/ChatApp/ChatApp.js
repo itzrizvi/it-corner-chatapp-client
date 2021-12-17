@@ -60,6 +60,9 @@ const ChatApp = () => {
         });
         socket.on('typing', (user) => {
             setUserTyping(`${user} is typing...!!!`);
+            setTimeout(() => {
+                setUserTyping('');
+            }, 5000);
         });
 
         return () => {
