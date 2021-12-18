@@ -5,23 +5,40 @@ let user;
 
 const Login = () => {
 
-    const [name, setName] = useState("");
-    const logedUser = () => {
-        user = document.getElementById("name").value;
+    const [userData, setUserData] = useState([]);
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    
+    const logedUser = (e) => {
+        e.preventDefault();
+        const userEmail = document.getElementById("email").value;
+        // const userPassword = document.getElementById("password").value;
 
-        // fetch('http://localhost:5000/users/admin@admin.com')
-        // .then(res=>res.json())
-        // .then(data=>console.log(data))
+        fetch(`http://localhost:5000/users/${userEmail}`)
+        .then(res=>res.json())
+        .then(data=>{
+            setUserData(data);
+           
+        });
+        
     }
+
+    
+
+   
     return (
         <div>
             <h2>Login Here</h2>
-            {!name && <p>Please Enter Your User Name</p>}
+            {!email && <p>Please Enter Your User Name</p>}
             <form className="login-form">
-                <input onChange={(e) => setName(e.target.value)} type="text" id="name" placeholder='your name please' required />
-                <Link onClick={(event) => !name ? event.preventDefault() : null} to="/chatapp">
-                    <button onClick={logedUser} className='login-btn'>Login</button>
-                </Link>
+                
+                <input onBlur={(e) => setEmail(e.target.value)} type="email" id="email" placeholder='Enter your email please...' required />
+                <input onBlur={(e) => setPassword(e.target.value)} type="password" id="password" placeholder='Enter your password please...' required />
+                {/* <input onChange={(e) => setName(e.target.value)} type="text" id="name" placeholder='your name please' required /> */}
+
+                <button onClick={logedUser} className='login-btn'>Login</button>
+
+
             </form>
             <Link to='/register'>Don't have an account? Register Here</Link>
         </div>
