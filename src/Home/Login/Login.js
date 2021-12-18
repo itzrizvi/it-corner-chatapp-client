@@ -8,6 +8,10 @@ const Login = () => {
     const [name, setName] = useState("");
     const logedUser = () => {
         user = document.getElementById("name").value;
+
+        // fetch('http://localhost:5000/users/admin@admin.com')
+        // .then(res=>res.json())
+        // .then(data=>console.log(data))
     }
     return (
         <div>
@@ -26,3 +30,4 @@ const Login = () => {
 
 export default Login;
 export { user };
+

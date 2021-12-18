@@ -1,0 +1,88 @@
+.chat-header h2 {
+  padding: 0;
+  margin: 0;
+}
+.chatcomp {
+  background-color: #787878;
+  color: #ffffff;
+  height: 550px;
+}
+
+.chatbox {
+  height: 300px;
+  width: 50%;
+  margin: auto;
+  background-color: #ffffff;
+  color: #000000;
+}
+.left-side-chat {
+  display: grid;
+  justify-content: flex-start;
+  background-color: #14c9b4;
+  color: #ffffff;
+  height: 24px;
+  width: fit-content;
+  padding: 10px;
+  margin-bottom: 5px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+  margin-top: 5px;
+}
+.right-side-chat {
+  display: grid;
+  background-color: #000000db;
+  color: #ffffff;
+  height: 24px;
+  padding: 10px;
+  margin-bottom: 5px;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: 5px;
+  margin-top: 5px;
+}
+
+.msg-inputBox {
+  width: 50%;
+  margin: auto;
+  position: relative;
+}
+
+.msg-inputBox input {
+  width: 95%;
+  display: block;
+  padding: 10px 10px;
+  margin: 0px;
+  outline: none;
+}
+
+button.msgSend-btn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 12px 40px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+}
+.react-scroll-to-bottom--css-vgitq-1tj0vk3 {
+  background-color: rgb(0 0 0);
+}
+
+.react-scroll-to-bottom--css-vgitq-1tj0vk3:hover {
+  background-color: rgb(28 169 171);
+}
+
+p.typing-tag {
+  display: flex;
+  margin-left: 5px;
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  background-color: aliceblue;
+  width: fit-content;
+  padding: 5px;
+}
+
+.typing-div {
+  height: 30px;
+}

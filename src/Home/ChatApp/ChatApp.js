@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import ReactScrollToBottom from 'react-scroll-to-bottom';
 import socketIO from "socket.io-client";
 import { user } from '../Login/Login';
 import Messages from '../Messages/Messages';
-import ReactScrollToBottom from 'react-scroll-to-bottom';
 import './ChatApp.css';
 
 const ENDPOINT = 'http://localhost:5000/';
@@ -15,15 +15,25 @@ const ChatApp = () => {
 
     const [userTyping, setUserTyping] = useState('');
 
+    const [typingKeys, setTypingKeys]= useState('');
+
+    const [userDetect, setUserDetec] = useState('')
+
+
     const sendMessage = () => {
         const message = document.getElementById('chatInput').value;
         socket.emit('message', { message, id });
         document.getElementById('chatInput').value = "";
-
     }
     const typingNotification = () => {
+        let typedMessage = document.getElementById('chatInput').value;
+        // console.log(typedMessage)
+        setTypingKeys(typedMessage);
+        socket.emit('typingProcess', typingKeys);
+        socket.emit('user', user);
         socket.emit('typing', user);
     }
+    
 
     useEffect(() => {
 
@@ -58,10 +68,24 @@ const ChatApp = () => {
         socket.on('messageSent', (data) => {
             setMessages([...messages, data]);
         });
-        socket.on('typing', (user) => {
-            setUserTyping(`${user} is typing...!!!`);
+        // socket.on('typing', (user) => {
+        //     setUserTyping(`${user} : is typing...!!!`);
+        //     setTimeout(() => {
+        //         setUserTyping('');
+        //     }, 5000);
+        // });
+
+        socket.on('typingProcess', (typingKeys)=>{
+            setUserTyping(typingKeys);
             setTimeout(() => {
                 setUserTyping('');
+            }, 5000);
+        });
+
+        socket.on('user', (user)=>{
+            setUserDetec(user);
+            setTimeout(() => {
+                setUserDetec();
             }, 5000);
         });
 
@@ -69,7 +93,7 @@ const ChatApp = () => {
             socket.off();
             setUserTyping('')
         }
-    }, [messages]);
+    }, [messages, typingKeys]);
 
     return (
         <div className='chatcomp'>
@@ -78,12 +102,15 @@ const ChatApp = () => {
                     <h2>IT-Corner Chat App</h2>
                 </div>
                 <h3>This is {user}</h3>
-                <ReactScrollToBottom className="chatbox">
-                    {userTyping && <p>{userTyping}</p>}
-                    {messages.map((item, i) => <Messages key={i} message={item.message} user={item.id === id ? '' : item.user} conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
-                </ReactScrollToBottom>
+                    <ReactScrollToBottom className="chatbox">
+                            
+                            {messages.map((item, i) => <Messages key={i} message={item.message} user={item.id === id ? '' : item.user} conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
+                            <div className='typing-div'>
+                                {userTyping && <p className='typing-tag'>{userDetect} : {userTyping}</p>}
+                            </div>
+                    </ReactScrollToBottom>
                 <div className="msg-inputBox">
-                    <input onKeyPress={(event) => event.key === 'Enter' ? sendMessage() : typingNotification()} type="text" id='chatInput' />
+                    <input onKeyUp={(event) => event.key === 'Enter' ? sendMessage() : typingNotification()} type="text" id='chatInput' />
                     <button onClick={sendMessage} className='msgSend-btn'>Send</button>
 
                 </div>

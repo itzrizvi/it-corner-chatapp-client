@@ -1,0 +1,21 @@
+form.registration-form input {
+  width: 40%;
+  border: 1px solid #d9d9d9;
+  outline: none;
+  padding: 10px;
+  margin-bottom: 11px;
+}
+
+form.registration-form button {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  font-size: 15px;
+  padding: 10px 30px;
+  width: 200px;
+  cursor: pointer;
+}
+
+form.registration-form button:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
