@@ -11,29 +11,48 @@ let socket;
 const ChatApp = () => {
 
     const [id, setId] = useState("");
+
     const [messages, setMessages] = useState([]);
 
     const [userTyping, setUserTyping] = useState('');
 
     const [typingKeys, setTypingKeys]= useState('');
 
-    const [userDetect, setUserDetec] = useState('')
-
+    const [userDetect, setUserDetec] = useState('');
 
     const sendMessage = () => {
         const message = document.getElementById('chatInput').value;
         socket.emit('message', { message, id });
-        document.getElementById('chatInput').value = "";
+        
+
+        const messageInsert = document.getElementById('chatInput').value;
+        // setMessegeHistory(messageInsert)
+        const newMessegeInsert ={messageInsert, user};
+
+
+        fetch('http://localhost:5000/msghistory',{
+            method:'POST',
+            headers:{
+                'content-type' : 'application/json',
+            },
+            body: JSON.stringify(newMessegeInsert),
+        })
+        .then(res=>res.json())
+        .then(data=>{
+            if(data.insertedId){
+                document.getElementById('chatInput').value = "";
+            }
+        })
+
     }
+
     const typingNotification = () => {
         let typedMessage = document.getElementById('chatInput').value;
-        // console.log(typedMessage)
         setTypingKeys(typedMessage);
         socket.emit('typingProcess', typingKeys);
         socket.emit('user', user);
         socket.emit('typing', user);
     }
-    
 
     useEffect(() => {
 
@@ -102,8 +121,7 @@ const ChatApp = () => {
                     <h2>IT-Corner Chat App</h2>
                 </div>
                 <h3>This is {user}</h3>
-                    <ReactScrollToBottom className="chatbox">
-                            
+                    <ReactScrollToBottom className="chatbox" style={{padding:'10px'}}>
                             {messages.map((item, i) => <Messages key={i} message={item.message} user={item.id === id ? '' : item.user} conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
                             <div className='typing-div'>
                                 {userTyping && <p className='typing-tag'>{userDetect} : {userTyping}</p>}

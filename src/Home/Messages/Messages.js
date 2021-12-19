@@ -6,6 +6,7 @@ const Messages = ({ message, user, conditionalClass }) => {
         return (
                 <div className={`${conditionalClass}`}>
                     {`${user}: ${message}`}
+                    
                 </div>
         );
     } else {

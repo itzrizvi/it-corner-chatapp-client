@@ -14,31 +14,33 @@
   margin: auto;
   background-color: #ffffff;
   color: #000000;
+  padding: 15px;
 }
 .left-side-chat {
   display: grid;
   justify-content: flex-start;
   background-color: #14c9b4;
   color: #ffffff;
-  height: 24px;
+  height: auto;
   width: fit-content;
   padding: 10px;
   margin-bottom: 5px;
-  margin-bottom: 5px;
-  margin-left: 5px;
   margin-top: 5px;
+  margin-right: 5px;
+  text-align: left;
 }
 .right-side-chat {
   display: grid;
   background-color: #000000db;
   color: #ffffff;
-  height: 24px;
+  height: auto;
   padding: 10px;
   margin-bottom: 5px;
   width: fit-content;
   margin-left: auto;
   margin-right: 5px;
   margin-top: 5px;
+  text-align: ritght;
 }
 
 .msg-inputBox {
@@ -64,12 +66,14 @@ button.msgSend-btn {
   color: #ffffff;
   border: none;
 }
-.react-scroll-to-bottom--css-vgitq-1tj0vk3 {
-  background-color: rgb(0 0 0);
+.chatbox button {
+  left: 12px !important;
+  background-color: aqua !important;
 }
 
-.react-scroll-to-bottom--css-vgitq-1tj0vk3:hover {
-  background-color: rgb(28 169 171);
+.chatbox button:hover {
+  background-color: rgb(28 169 171) !important;
+  left: 12px !important;
 }
 
 p.typing-tag {
