@@ -3,6 +3,7 @@ import ReactScrollToBottom from 'react-scroll-to-bottom';
 import socketIO from "socket.io-client";
 import { user } from '../Login/Login';
 import Messages from '../Messages/Messages';
+import PreviousMessege from '../PreviousMessege/PreviousMessege';
 import './ChatApp.css';
 
 const ENDPOINT = 'http://localhost:5000/';
@@ -20,14 +21,35 @@ const ChatApp = () => {
 
     const [userDetect, setUserDetec] = useState('');
 
+    const [chatHistory, setChatHistory]= useState([]);
+
+    useEffect(()=>{
+        fetch('http://localhost:5000/msghistory')
+        .then(res=>res.json())
+        .then(data=>setChatHistory(data))
+    },[]);
+
+    const filterUserChat = chatHistory.filter(item => item.user === user);
+    const otherUsrChat = chatHistory.filter(item => item.user !== user);
+    const allMesseges = filterUserChat.concat(otherUsrChat);
+
+
+    const msgSortings = allMesseges.sort(function(a,b){
+        return new Date(b.createdAt) - new Date(a.createdAt);
+    })
+    const msgHistorySorting = msgSortings.reverse();
+
     const sendMessage = () => {
         const message = document.getElementById('chatInput').value;
         socket.emit('message', { message, id });
         
 
         const messageInsert = document.getElementById('chatInput').value;
-        // setMessegeHistory(messageInsert)
-        const newMessegeInsert ={messageInsert, user};
+
+        const gettingMSGTime = new Date(Date.now());
+        let createdAt = gettingMSGTime.toString();
+ 
+        const newMessegeInsert ={messageInsert, user, createdAt};
 
 
         fetch('http://localhost:5000/msghistory',{
@@ -64,20 +86,20 @@ const ChatApp = () => {
 
         socket.emit("logedIn", { user });
 
-        socket.on('welcome', (data) => {
-            setMessages([...messages, data]);
-        });
+        // socket.on('welcome', (data) => {
+        //     setMessages([...messages, data]);
+        // });
 
-        socket.on('joinedUser', (data) => {
-            setMessages([...messages, data]);
-        });
+        // socket.on('joinedUser', (data) => {
+        //     setMessages([...messages, data]);
+        // });
 
-        socket.on('leave', (data) => {
-            setMessages([...messages, data]);
-        });
+        // socket.on('leave', (data) => {
+        //     setMessages([...messages, data]);
+        // });
 
         return () => {
-            socket.emit('disconnectUser');
+            // socket.emit('disconnectUser');
             socket.off();
         }
     }, []);
@@ -122,7 +144,20 @@ const ChatApp = () => {
                 </div>
                 <h3>This is {user}</h3>
                     <ReactScrollToBottom className="chatbox" style={{padding:'10px'}}>
-                            {messages.map((item, i) => <Messages key={i} message={item.message} user={item.id === id ? '' : item.user} conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
+                            {msgHistorySorting.map((item, i)=> <PreviousMessege 
+                                key={i} 
+                                message={item.messageInsert} 
+                                user={item.user === user ? '' : item.user}
+                                createdAt ={item.createdAt} 
+                                conditionalClass={item.user === user ? 'right-side-chat' : 'left-side-chat'}
+                                ></PreviousMessege>)}
+
+                            {messages.map((item, i) => <Messages 
+                                key={i}
+                                message={item.message} 
+                                user={item.id === id ? '' : item.user} 
+                                conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
+
                             <div className='typing-div'>
                                 {userTyping && <p className='typing-tag'>{userDetect} : {userTyping}</p>}
                             </div>

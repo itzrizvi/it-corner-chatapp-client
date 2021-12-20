@@ -1,17 +1,13 @@
 import React from 'react';
 import { format } from 'timeago.js';
 
-const Messages = ({ message, user, conditionalClass}) => {
-
-    const getInstantMSGTime = new Date(Date.now());
-    const createdAt = getInstantMSGTime.toString();
+const PreviousMessege = ({message, user, conditionalClass, createdAt }) => {
 
     if (user) {
         return (
                 <div className={`${conditionalClass}`}>
                     <span>{`${user}: ${message}`}</span>
                     <span className='chat-date'>{format(createdAt)}</span>
-                    
                     
                 </div>
         );
@@ -23,7 +19,6 @@ const Messages = ({ message, user, conditionalClass}) => {
                 </div>
         );
     }
-
 };
 
-export default Messages;
+export default PreviousMessege;

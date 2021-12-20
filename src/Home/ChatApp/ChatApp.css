@@ -5,11 +5,11 @@
 .chatcomp {
   background-color: #787878;
   color: #ffffff;
-  height: 550px;
+  height: 650px;
 }
 
 .chatbox {
-  height: 300px;
+  height: 400px;
   width: 50%;
   margin: auto;
   background-color: #ffffff;
@@ -24,10 +24,11 @@
   height: auto;
   width: fit-content;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   margin-top: 5px;
   margin-right: 5px;
   text-align: left;
+  position: relative;
 }
 .right-side-chat {
   display: grid;
@@ -35,12 +36,13 @@
   color: #ffffff;
   height: auto;
   padding: 10px;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   width: fit-content;
   margin-left: auto;
   margin-right: 5px;
   margin-top: 5px;
-  text-align: ritght;
+  text-align: right;
+  position: relative;
 }
 
 .msg-inputBox {
@@ -89,4 +91,11 @@ p.typing-tag {
 
 .typing-div {
   height: 30px;
+}
+
+span.chat-date {
+  position: absolute;
+  bottom: -14px;
+  color: #000000;
+  font-size: 9px;
 }
