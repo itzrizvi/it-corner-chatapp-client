@@ -1,15 +1,28 @@
+import Picker from 'emoji-picker-react';
 import React, { useEffect, useState } from 'react';
 import ReactScrollToBottom from 'react-scroll-to-bottom';
 import socketIO from "socket.io-client";
+import emojiPick from '../../images/emoji-smile.svg';
 import { user } from '../Login/Login';
 import Messages from '../Messages/Messages';
 import PreviousMessege from '../PreviousMessege/PreviousMessege';
 import './ChatApp.css';
 
+
 const ENDPOINT = 'http://localhost:5000/';
 
 let socket;
 const ChatApp = () => {
+
+    const [inputStr, setInputStr] = useState('');
+    const [showPicker, setShowPicker] = useState(false);
+   
+    const onEmojiClick = (event, emojiObject) => {
+      setInputStr(prevInput => prevInput + emojiObject.emoji);
+      setShowPicker(false);
+    };
+
+
 
     const [id, setId] = useState("");
 
@@ -63,13 +76,15 @@ const ChatApp = () => {
         .then(data=>{
             if(data.insertedId){
                 document.getElementById('chatInput').value = "";
+                setInputStr("")
             }
-        })
+        });
 
     }
 
     const typingNotification = () => {
         let typedMessage = document.getElementById('chatInput').value;
+        setInputStr(typedMessage)
         setTypingKeys(typedMessage);
         socket.emit('typingProcess', typingKeys);
         socket.emit('user', user);
@@ -162,11 +177,22 @@ const ChatApp = () => {
                                 {userTyping && <p className='typing-tag'>{userDetect} : {userTyping}</p>}
                             </div>
                     </ReactScrollToBottom>
-                <div className="msg-inputBox">
-                    <input onKeyUp={(event) => event.key === 'Enter' ? sendMessage() : typingNotification()} type="text" id='chatInput' />
+                <div className="msg-inputBox picker-container">
+                    <input onChange={e => setInputStr(e.target.value)} value={inputStr} onKeyUp={(event) => event.key === 'Enter' ? sendMessage() : typingNotification()} type="text" id='chatInput' />
+                    <img className="emoji-icon" alt='EMOJI' src={emojiPick} onClick={() => setShowPicker(val => !val)} />
+                    {showPicker && <Picker pickerStyle={{ width: '100%' }} onEmojiClick={onEmojiClick} />}
                     <button onClick={sendMessage} className='msgSend-btn'>Send</button>
 
                 </div>
+                <div className="picker-container">
+                    {/* <input
+                    className="input-style"
+                    value={inputStr}
+                    onChange={e => setInputStr(e.target.value)} /> */}
+
+                    
+                </div>
+                            
             </div>
 
 

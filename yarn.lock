@@ -3741,6 +3741,11 @@
   "resolved" "https://registry.npmjs.org/emittery/-/emittery-0.8.1.tgz"
   "version" "0.8.1"
 
+"emoji-picker-react@^3.4.12":
+  "integrity" "sha512-i2VRfKRltFJjsY5ste7UPOn24uXcb4yuOVU6u9Cm3gsSc1MvCqr3XsBGhhhK8jPLeDB9llWtFQ6vABZSqNKQxA=="
+  "resolved" "https://registry.npmjs.org/emoji-picker-react/-/emoji-picker-react-3.4.12.tgz"
+  "version" "3.4.12"
+
 "emoji-regex@^8.0.0":
   "integrity" "sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A=="
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-8.0.0.tgz"
