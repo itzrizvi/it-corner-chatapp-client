@@ -1,0 +1,105 @@
+/* popup style  */
+.popup-content {
+  /* position: relative; */
+  /* background-image: url("../Image/backgroundImg2.png"); */
+  /* margin: auto; */
+  background: white;
+  width: 100%;
+  border: none;
+  z-index: -2;
+  padding: 0;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+  /* padding: 0 !important;
+      border-top-left-radius: 50% !important;
+      border-top-right-radius: 50% !important; */
+}
+.popup-arrow {
+  color: rgb(255, 255, 255);
+}
+[role="tooltip"].popup-content {
+  padding: 0;
+  height: 700px; /* height: 850px;it need to change for viewport  */
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.popup-overlay {
+  background: rgba(146, 6, 6, 0.5);
+}
+[data-popup="tooltip"].popup-overlay {
+  background: transparent;
+
+  border-radius: 0px;
+}
+
+@media only screen and (max-device-width: 375px) {
+  #simple-bar {
+    max-height: 800px !important;
+  }
+  .popup-content {
+    background: white;
+    height: 800px;
+    width: 100%;
+    border: none;
+    z-index: -2;
+  }
+  [role="tooltip"].popup-content {
+    padding: 0;
+    height: 810px;
+    /* height: 850px;it need to change for viewport  */
+    width: 367px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+  }
+}
+
+/* .decoration{
+   position: absolute;
+        background-image: linear-gradient(50deg, rgb(74, 83, 204), rgb(37, 68, 241));
+        height: 12%;
+        width: 100%;
+        z-index: -2;
+    }  */
+
+.headline {
+  margin-top: -120px;
+  position: relative;
+}
+
+.fixedImg {
+  background-image: url("../../images/backgroundImg2.png");
+  min-height: 300px;
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-bottom: -210px;
+  z-index: 0;
+  border-radius: 10px;
+  border-bottom-left-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.message-part {
+  margin-top: -120px;
+  position: relative;
+}
+
+.search-part {
+  margin-top: -120px;
+  position: relative;
+}
+
+.status-part {
+  margin-top: -120px;
+  position: relative;
+}
+
+.support-part {
+  margin-top: -120px;
+  position: relative;
+}
+.new-intercom {
+  margin-top: -120px;
+  position: relative;
+}

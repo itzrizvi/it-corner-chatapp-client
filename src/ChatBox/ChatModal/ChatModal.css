@@ -1,0 +1,67 @@
+.chat-icon {
+  border-radius: 50px;
+  background-color: #3047ec;
+  height: 60px;
+  width: 60px;
+}
+
+.chat-modal-position {
+  position: relative;
+}
+
+.chat-modal {
+  position: absolute;
+  right: 10px;
+  top: 743px;
+}
+
+.scrollbar-container {
+  width: 100%;
+  position: relative;
+  height: 450px;
+}
+
+form.load-user {
+  width: 96%;
+  position: absolute;
+  top: 40%;
+  right: 0;
+  bottom: 0;
+  left: 2%;
+  /* display: block; */
+  z-index: 1;
+}
+
+form.load-user input {
+  outline: none;
+  border: 1px solid #0646e1;
+  padding: 10px 15px;
+  width: 100%;
+  text-align: center;
+}
+
+form.load-user button {
+  outline: none;
+  border: 1px solid #0646e1;
+  background: linear-gradient(45deg, #0646e1, #000000);
+  color: #ffffff;
+  margin-top: 5px;
+  padding: 10px 15px;
+  width: 100%;
+}
+
+.chatbox > div::-webkit-scrollbar {
+  width: 10px;
+}
+
+.chatbox > div::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+.chatbox > div::-webkit-scrollbar-thumb {
+  background-color: #002f71;
+}
+
+.chatbox > div::-webkit-scrollbar-thumb:hover {
+  background-color: #0646e1;
+}

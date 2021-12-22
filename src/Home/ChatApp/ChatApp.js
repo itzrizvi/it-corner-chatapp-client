@@ -2,6 +2,7 @@ import Picker from 'emoji-picker-react';
 import React, { useEffect, useState } from 'react';
 import ReactScrollToBottom from 'react-scroll-to-bottom';
 import socketIO from "socket.io-client";
+import attachmentImg from '../../images/attachment.svg.png';
 import emojiPick from '../../images/emoji-smile.svg';
 import { user } from '../Login/Login';
 import Messages from '../Messages/Messages';
@@ -15,14 +16,8 @@ let socket;
 const ChatApp = () => {
 
     const [inputStr, setInputStr] = useState('');
+
     const [showPicker, setShowPicker] = useState(false);
-   
-    const onEmojiClick = (event, emojiObject) => {
-      setInputStr(prevInput => prevInput + emojiObject.emoji);
-      setShowPicker(false);
-    };
-
-
 
     const [id, setId] = useState("");
 
@@ -36,34 +31,43 @@ const ChatApp = () => {
 
     const [chatHistory, setChatHistory]= useState([]);
 
+    const [media, setMedia]= useState({});
+
     useEffect(()=>{
         fetch('http://localhost:5000/msghistory')
         .then(res=>res.json())
-        .then(data=>setChatHistory(data))
+        .then(data=>{
+            setChatHistory(data);
+            
+        })
     },[]);
 
+   
+
+    const onEmojiClick = (event, emojiObject) => {
+        setInputStr(prevInput => prevInput + emojiObject.emoji);
+        setShowPicker(false);
+    };
+
     const filterUserChat = chatHistory.filter(item => item.user === user);
-    const otherUsrChat = chatHistory.filter(item => item.user !== user);
-    const allMesseges = filterUserChat.concat(otherUsrChat);
 
-
-    const msgSortings = allMesseges.sort(function(a,b){
+    const msgSortings = chatHistory.sort(function(a,b){
         return new Date(b.createdAt) - new Date(a.createdAt);
     })
     const msgHistorySorting = msgSortings.reverse();
 
     const sendMessage = () => {
         const message = document.getElementById('chatInput').value;
-        socket.emit('message', { message, id });
-        
+        const mediaFiles = media;
 
+        socket.emit('message', { message,mediaFiles, id });
+        
         const messageInsert = document.getElementById('chatInput').value;
 
         const gettingMSGTime = new Date(Date.now());
         let createdAt = gettingMSGTime.toString();
  
-        const newMessegeInsert ={messageInsert, user, createdAt};
-
+        const newMessegeInsert ={messageInsert, user, createdAt, mediaFiles};
 
         fetch('http://localhost:5000/msghistory',{
             method:'POST',
@@ -76,12 +80,15 @@ const ChatApp = () => {
         .then(data=>{
             if(data.insertedId){
                 document.getElementById('chatInput').value = "";
-                setInputStr("")
+                document.getElementById('attchInput').value = "";
+                // console.log('Dhukse')
+                setMedia("");
             }
         });
 
     }
 
+    
     const typingNotification = () => {
         let typedMessage = document.getElementById('chatInput').value;
         setInputStr(typedMessage)
@@ -159,8 +166,10 @@ const ChatApp = () => {
                 </div>
                 <h3>This is {user}</h3>
                     <ReactScrollToBottom className="chatbox" style={{padding:'10px'}}>
-                            {msgHistorySorting.map((item, i)=> <PreviousMessege 
-                                key={i} 
+
+                            {filterUserChat.length !== 0 && msgHistorySorting.map((item, i)=> <PreviousMessege 
+                                key={i}
+                                mediaFiles={item?.mediaFiles}
                                 message={item.messageInsert} 
                                 user={item.user === user ? '' : item.user}
                                 createdAt ={item.createdAt} 
@@ -169,6 +178,7 @@ const ChatApp = () => {
 
                             {messages.map((item, i) => <Messages 
                                 key={i}
+                                mediaFiles={item.mediaFiles}
                                 message={item.message} 
                                 user={item.id === id ? '' : item.user} 
                                 conditionalClass={item.id === id ? 'right-side-chat' : 'left-side-chat'} />)}
@@ -181,16 +191,28 @@ const ChatApp = () => {
                     <input onChange={e => setInputStr(e.target.value)} value={inputStr} onKeyUp={(event) => event.key === 'Enter' ? sendMessage() : typingNotification()} type="text" id='chatInput' />
                     <img className="emoji-icon" alt='EMOJI' src={emojiPick} onClick={() => setShowPicker(val => !val)} />
                     {showPicker && <Picker pickerStyle={{ width: '100%' }} onEmojiClick={onEmojiClick} />}
+                    <input onChange={(e)=>{
+                        const file = e.target.files[0];
+                        const reader = new FileReader();
+                        reader.readAsDataURL(file);
+                        reader.onload = function(){
+                            console.log(reader.result);
+                            setMedia({
+                                image: true,
+                                content: reader.result,
+                                name: file.name,
+                            })
+                        }
+
+                        reader.onerror = function(error){
+                            console.log(error);
+                        }
+                    }} type="file" id='attchInput' />
+                    <label htmlFor="attchInput">
+                        <img className="attachment-icon" alt='ATTACHMENT' src={attachmentImg} />
+                    </label>
                     <button onClick={sendMessage} className='msgSend-btn'>Send</button>
 
-                </div>
-                <div className="picker-container">
-                    {/* <input
-                    className="input-style"
-                    value={inputStr}
-                    onChange={e => setInputStr(e.target.value)} /> */}
-
-                    
                 </div>
                             
             </div>

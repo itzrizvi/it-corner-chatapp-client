@@ -1,0 +1,39 @@
+/* .search-btn{
+    border-right: none;
+    border-color: rgb(48, 71, 236);
+    border-radius: ;
+}
+
+
+
+
+.form-style{
+    border-left: none;
+    border-color: rgb(48, 71, 236);
+    height: 50px;
+} */
+
+.search-btn {
+  border: none;
+}
+
+.search-btn:hover {
+  background-color: transparent;
+  color: grey;
+}
+
+.form-style {
+  border: none;
+  border-radius: 30px;
+  width: 270px;
+}
+
+.form-style:focus {
+  outline: none;
+}
+
+.form-full {
+  /* border-color: rgb(48, 71, 236); */
+  border-radius: 30px;
+  border: 1px solid rgb(48, 71, 236);
+}

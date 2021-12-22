@@ -1,0 +1,119 @@
+/* popup style  */
+.chat-popup-content {
+  background: white;
+  width: 100%;
+  border: none;
+  z-index: -2;
+  padding: 0;
+  border-top-left-radius: 10px !important;
+  border-top-right-radius: 10px !important;
+}
+.chat-popup-arrow {
+  color: rgb(255, 255, 255);
+}
+[role="tooltip"].chat-popup-content {
+  padding: 0; /* height: 850px;it need to change for viewport  */
+  width: 400px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 0px 3px;
+}
+
+.chat-popup-overlay {
+  background: rgba(0, 0, 0, 0.5);
+}
+[data-chat-popup="tooltip"].chat-popup-overlay {
+  background: transparent;
+
+  border-radius: 0px;
+}
+
+/* .decoration{
+   position: absolute;
+        background-image: linear-gradient(50deg, rgb(74, 83, 204), rgb(37, 68, 241));
+        height: 12%;
+        width: 100%;
+        z-index: -2;
+    }  */
+
+/* .headline{
+    margin-top: -120px; 
+    position: relative
+  }
+  
+  
+  .message-part{
+    
+    margin-top: -120px; 
+    position: relative
+  }
+  
+  
+  .search-part{
+    margin-top: -120px; 
+    position: relative
+  }
+  
+  .status-part{
+    margin-top: -120px; 
+    position: relative
+  } 
+  
+  .support-part{
+    margin-top: -120px; 
+    position: relative
+  } 
+  .new-intercom{
+    margin-top: -120px; 
+    position: relative
+  } */
+
+.msdDetailImg {
+  background-image: url("../../images/backgroundImg2.png");
+  background-attachment: fixed;
+  background-position: top;
+  background-repeat: no-repeat;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-size: cover;
+}
+
+.msdDetailImg p {
+  color: rgb(214, 212, 212);
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.backBtn:hover {
+  background-color: rgba(0, 0, 0, 0.486);
+}
+
+.messegin-input {
+  border: none;
+  height: 50px;
+  color: rgb(70, 70, 70);
+}
+
+.gifIcon {
+  height: 50px;
+}
+
+.messegin-input:focus {
+  outline: none;
+}
+
+@media screen and (max-width: 375px) {
+  .msdDetailImg {
+    background-image: url("../../images/backgroundImg2.png");
+    background-attachment: fixed;
+    background-position: top;
+    background-repeat: no-repeat;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+
+  #chat-container {
+    height: 590px !important;
+  }
+  #perfect-scroll {
+    height: 50px !important;
+  }
+}

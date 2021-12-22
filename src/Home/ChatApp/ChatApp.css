@@ -9,33 +9,32 @@
 }
 
 .chatbox {
-  height: 400px;
-  width: 50%;
+  width: 100%;
   margin: auto;
   background-color: #ffffff;
   color: #000000;
-  padding: 15px;
 }
 .left-side-chat {
   display: grid;
   justify-content: flex-start;
-  background-color: #14c9b4;
-  color: #ffffff;
+  background: #ddd;
+  color: #000;
   height: auto;
   width: fit-content;
-  padding: 10px;
+  padding: 10px 18px;
   margin-bottom: 20px;
   margin-top: 5px;
   margin-right: 5px;
   text-align: left;
   position: relative;
+  border-radius: 7px;
 }
 .right-side-chat {
   display: grid;
-  background-color: #000000db;
+  background: #002f71;
   color: #ffffff;
   height: auto;
-  padding: 10px;
+  padding: 10px 18px;
   margin-bottom: 20px;
   width: fit-content;
   margin-left: auto;
@@ -43,12 +42,20 @@
   margin-top: 5px;
   text-align: right;
   position: relative;
+  border-radius: 7px;
+}
+
+.right-side-chat img,
+.left-side-chat img {
+  width: 200px;
+  height: auto;
 }
 
 .msg-inputBox {
-  width: 50%;
+  width: 100%;
   margin: auto;
   position: relative;
+  height: 47px;
 }
 
 .msg-inputBox input {
@@ -57,24 +64,27 @@
   padding: 10px 10px;
   margin: 0px;
   outline: none;
+  border: none;
+  border-top: 1px solid #d9d9d9;
 }
 
 button.msgSend-btn {
   position: absolute;
   top: 0;
   right: 0;
-  padding: 12px 40px;
-  background-color: #000000;
-  color: #ffffff;
+  padding: 12px 16px;
+  background-color: #e2e2e2;
+  color: #000000;
   border: none;
+  border-bottom-right-radius: 6px;
 }
 .chatbox button {
   left: 12px !important;
-  background-color: aqua !important;
+  background-color: #002f71 !important;
 }
 
 .chatbox button:hover {
-  background-color: rgb(28 169 171) !important;
+  background-color: #0646e1 !important;
   left: 12px !important;
 }
 
@@ -106,8 +116,11 @@ span.chat-date {
 .emoji-icon {
   cursor: pointer;
   position: absolute;
-  top: 11px;
-  right: 126px;
+  top: 16px;
+  right: 79px;
+  opacity: 0.6;
+  width: 20px;
+  height: 20px;
 }
 .input-style {
   padding: 7px 30px 7px 10px;
@@ -115,4 +128,17 @@ span.chat-date {
   border-radius: 3px;
   border: 1px solid #999;
   margin-bottom: 10px;
+}
+
+#attchInput {
+  display: none;
+}
+
+.attachment-icon {
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  top: 13px;
+  right: 27%;
+  cursor: pointer;
 }

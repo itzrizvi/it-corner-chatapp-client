@@ -1,0 +1,47 @@
+.send-Icon {
+  background-color: rgb(48, 71, 236);
+  border-radius: 30px;
+  height: 50px;
+  width: 70%;
+}
+
+.clock-Icon {
+  color: rgb(48, 71, 236);
+}
+
+.image1 {
+  border-radius: 80px;
+  position: absolute;
+  height: 60px;
+  border: 1px solid white;
+
+  /* position: relative;
+    top: 0;
+    left: 0;
+    border: 1px red solid; */
+}
+
+.image-holder {
+  position: relative;
+}
+.image2 {
+  border-radius: 80px;
+  position: absolute;
+  height: 60px;
+  /* position: absolute;
+    top: 30px;
+    left: 30px;
+    border: 1px green solid; */
+  top: 1px;
+  left: 33px;
+  border: 2px solid white;
+}
+
+.image3 {
+  border-radius: 80px;
+  position: absolute;
+  height: 60px;
+  top: 1px;
+  left: 55px;
+  border: 2px solid white;
+}
